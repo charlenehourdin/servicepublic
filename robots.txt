@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://charlenehourdin.github.io/servicepublic/sitemap.xml

@@ -1,10 +1,43 @@
 /* =========================================================
    service-public-demo — feuille de style commune
-   NOTE PEDAGOGIQUE : ce fichier contient volontairement
-   des pratiques non optimisées (cf. fichier ECOCONCEPTION.md)
+   Polices utilisées uniquement, hébergées en local (woff2)
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&family=Caveat:wght@500;600&display=swap');
+@font-face{
+  font-family:'Source Sans 3';
+  src:url('../fonts/source-sans-3-400.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Source Sans 3';
+  src:url('../fonts/source-sans-3-600.woff2') format('woff2');
+  font-weight:600;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Source Sans 3';
+  src:url('../fonts/source-sans-3-700.woff2') format('woff2');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Archivo Expanded';
+  src:url('../fonts/archivo-expanded.woff2') format('woff2');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Archivo Expanded';
+  src:url('../fonts/archivo-expanded.woff2') format('woff2');
+  font-weight:800;
+  font-style:normal;
+  font-display:swap;
+}
 
 :root{
   --bleu-france: #000091;
@@ -20,6 +53,36 @@
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+.visually-hidden{
+  position:absolute!important;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);
+  white-space:nowrap;border:0;
+}
+.skiplink{
+  position:absolute;
+  left:16px;top:-100px;
+  z-index:1000;
+  background:var(--blanc);
+  color:var(--bleu-france);
+  padding:12px 18px;
+  font-weight:700;
+  text-decoration:none;
+  border:2px solid var(--bleu-france);
+  border-radius:4px;
+}
+.skiplink:focus{
+  top:16px;
+}
+:focus-visible{
+  outline:3px solid var(--bleu-clair);
+  outline-offset:2px;
+}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible){
+  outline:none;
+}
 body{
   margin:0;
   font-family:'Source Sans 3', Arial, sans-serif;
@@ -30,14 +93,18 @@ body{
 }
 
 h1,h2,h3,h4{
-  font-family:'Archivo Expanded','Archivo',Arial,sans-serif;
+  font-family:'Archivo Expanded',Arial,sans-serif;
   font-weight:700;
   color:var(--bleu-france);
   margin-top:0;
 }
 
 a{color:var(--bleu-france);}
-img{max-width:100%;}
+img{
+  max-width:100%;
+  height:auto;
+  vertical-align:middle;
+}
 
 /* Bandeau tricolore signature */
 .bandeau-tricolore{
@@ -142,6 +209,15 @@ nav.nav-principale a:hover, nav.nav-principale a:focus{
   position:relative;z-index:1;
   border-radius:10px;overflow:hidden;
   box-shadow:0 20px 50px rgba(0,0,40,.35);
+  aspect-ratio:4 / 3;
+  background:rgba(0,0,40,.15);
+}
+.hero-media img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  aspect-ratio:4 / 3;
 }
 
 /* Bandeau de recherche / raccourcis */
@@ -175,7 +251,12 @@ section{padding:56px 0;}
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
   gap:24px;
+  list-style:none;
+  margin:0;
+  padding:0;
 }
+.grille-services > li{display:flex;}
+.grille-services > li > .carte-service{flex:1;}
 .carte-service{
   background:#fff;
   border:1px solid var(--gris-bordure);
@@ -216,10 +297,17 @@ section{padding:56px 0;}
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
 }
 .carte-actu{border-radius:8px;overflow:hidden;border:1px solid var(--gris-bordure);background:#fff;}
-.carte-actu img{display:block;width:100%;height:220px;object-fit:cover;}
+.carte-actu img{
+  display:block;width:100%;height:auto;
+  aspect-ratio:3 / 2;object-fit:cover;
+  background:var(--gris-fond);
+}
 .carte-actu .contenu{padding:16px;}
+.carte-actu h3{font-size:15.5px;margin:0 0 8px;}
 .carte-actu h4{font-size:15.5px;margin:0 0 8px;}
-.carte-actu p{font-size:13.5px;color:#555;margin:0;}
+.carte-actu p{font-size:13.5px;color:#444;margin:0;}
+
+.texte-aide{max-width:680px;color:#444;}
 
 /* Bandeau chiffres clés animés (décoratif) */
 .chiffres-cles{
@@ -229,7 +317,12 @@ section{padding:56px 0;}
 .chiffres-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;
 }
-.chiffre{font-family:'Archivo Expanded';font-size:38px;font-weight:800;color:var(--bleu-france);}
+.chiffre{
+  font-family:'Archivo Expanded';font-size:38px;font-weight:800;color:var(--bleu-france);
+  font-variant-numeric:tabular-nums;
+  min-height:1.15em;
+  line-height:1.15;
+}
 .chiffre-label{font-size:13.5px;color:#555;}
 
 /* Carrousel partenaires (autoplay, décoratif) */
@@ -244,7 +337,12 @@ section{padding:56px 0;}
   width:max-content;
   animation:defilement 22s linear infinite;
 }
-.piste-logos img{height:46px;width:auto;filter:grayscale(100%);opacity:.7;}
+.piste-logos img{
+  width:115px;height:46px;
+  object-fit:contain;
+  flex-shrink:0;
+  filter:grayscale(100%);opacity:.7;
+}
 @keyframes defilement{
   from{transform:translateX(0);}
   to{transform:translateX(-50%);}
@@ -261,14 +359,36 @@ footer.site-footer{
   display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
   margin-bottom:30px;
 }
-.footer-grid h4{color:#fff;font-size:14px;margin-bottom:14px;}
+.footer-grid h2,.footer-grid h4{color:#fff;font-size:14px;margin-bottom:14px;}
 .footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
 .footer-grid a{color:#cfd0e6;text-decoration:none;font-size:14px;}
-.footer-grid a:hover{color:#fff;text-decoration:underline;}
+.footer-grid a:hover,.footer-grid a:focus{color:#fff;text-decoration:underline;}
 .footer-bas{
   border-top:1px solid #33334d;
   padding-top:20px;font-size:12.5px;color:#9a9bc4;
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.footer-bas a{color:#cfd0e6;}
+.footer-bas a:hover,.footer-bas a:focus{color:#fff;}
+
+.zone-upload:focus-visible{
+  border-color:var(--bleu-france);
+  outline:3px solid var(--bleu-clair);
+  outline-offset:2px;
+}
+
+.stepper[role="list"]{list-style:none;padding:0;margin:0 0 40px;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.01ms!important;
+  }
+  .piste-logos{animation:none;flex-wrap:wrap;width:auto;justify-content:center;}
+  .mascotte-flottante{animation:none;}
+  .carte-service:hover{transform:none;}
 }
 
 /* =================== FORMULAIRES / PARCOURS =================== */
@@ -297,6 +417,8 @@ footer.site-footer{
   display:flex;justify-content:space-between;
   margin-bottom:40px;
   position:relative;
+  list-style:none;
+  padding:0;
 }
 .stepper::before{
   content:"";position:absolute;top:14px;left:0;right:0;height:2px;
@@ -364,6 +486,26 @@ footer.site-footer{
 .zone-upload:hover{border-color:var(--bleu-france);}
 .zone-upload .icone{font-size:34px;}
 .zone-upload .formats{font-size:12px;color:#777;margin-top:10px;}
+.info-poids{
+  margin-top:12px;font-size:14px;color:#333;font-weight:600;
+}
+.alerte-upload{
+  margin-top:12px;padding:12px 14px;border-radius:6px;
+  background:#fdeaea;border:1px solid var(--rouge-marianne);color:#8a0009;
+  font-size:14px;
+}
+.progress-wrap{
+  margin:18px 0 8px;
+}
+.progress-label{font-size:13.5px;margin-bottom:8px;color:#444;}
+.progress-track{
+  height:10px;background:#e8e8ef;border-radius:999px;overflow:hidden;
+}
+.progress-bar{
+  height:100%;width:0%;
+  background:var(--bleu-france);
+  transition:width .12s linear;
+}
 .liste-fichiers{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
 .fichier-item{
   display:flex;align-items:center;gap:10px;
@@ -381,18 +523,43 @@ footer.site-footer{
   display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:20px 0 28px;
 }
 .exemple-carte{border:1px solid var(--gris-bordure);border-radius:8px;overflow:hidden;background:#fff;}
-.exemple-carte img{width:100%;display:block;}
+.exemple-carte img{
+  width:100%;height:auto;display:block;
+  aspect-ratio:14 / 9;object-fit:cover;
+  background:var(--gris-fond);
+}
 .exemple-carte .legende{padding:10px 14px;font-size:13px;color:#444;border-top:1px solid var(--gris-bordure);}
 .exemple-carte.valide .legende{color:#1e7d34;font-weight:600;}
 .exemple-carte.invalide .legende{color:var(--rouge-marianne);font-weight:600;}
 
 /* Carrousel d'exemples plein format (autoplay) */
-.carrousel-exemples{position:relative;margin:20px 0 30px;border-radius:8px;overflow:hidden;border:1px solid var(--gris-bordure);}
-.carrousel-piste{display:flex;transition:transform .6s ease;}
-.carrousel-piste img{width:100%;flex:0 0 100%;display:block;}
+.carrousel-exemples{
+  position:relative;margin:20px 0 30px;border-radius:8px;overflow:hidden;
+  border:1px solid var(--gris-bordure);
+  background:#fff;
+}
+.carrousel-piste{
+  display:flex;transition:transform .6s ease;
+  aspect-ratio:14 / 9;
+  background:var(--gris-fond);
+}
+.carrousel-piste img{
+  width:100%;flex:0 0 100%;display:block;
+  height:100%;object-fit:cover;aspect-ratio:14 / 9;
+}
 .carrousel-points{display:flex;justify-content:center;gap:8px;padding:12px;background:#fff;}
 .carrousel-points span{width:8px;height:8px;border-radius:50%;background:#ccc;}
 .carrousel-points span.actif{background:var(--bleu-france);}
+
+.groupe-champ label input[type=checkbox]{
+  width:auto;margin-right:8px;
+}
+.sous-titre-h3{font-size:16px;margin:24px 0 12px;}
+.actions-confirmation{margin-top:20px;}
+
+/* Écrans multi-étapes */
+.ecran-etape{display:none;}
+.ecran-etape.actif{display:block;}
 
 .recapitulatif{
   background:var(--gris-fond);border-radius:8px;padding:24px;margin-bottom:24px;
@@ -425,9 +592,11 @@ footer.site-footer{
 /* Note flottante mascotte décorative (lourde, inutile) */
 .mascotte-flottante{
   position:fixed;bottom:24px;right:24px;
-  width:90px;z-index:50;
+  width:90px;height:90px;
+  z-index:50;
   animation:flotte 3.4s ease-in-out infinite;
   filter:drop-shadow(0 8px 18px rgba(0,0,0,.25));
+  contain:layout paint;
 }
 @keyframes flotte{
   0%,100%{transform:translateY(0);}
@@ -441,5 +610,5 @@ footer.site-footer{
   .footer-grid{grid-template-columns:repeat(2,1fr);}
   .ligne-deux{grid-template-columns:1fr;}
   .galerie-exemples{grid-template-columns:1fr;}
-  .mascotte-flottante{width:60px;}
+  .mascotte-flottante{width:60px;height:60px;}
 }

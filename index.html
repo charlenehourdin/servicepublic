@@ -3,13 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>service-public-demo — Mes démarches en ligne</title>
-<meta name="description" content="Portail de démonstration pour effectuer vos démarches administratives en ligne.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Mes démarches en ligne — Carte d'identité, listes électorales, acte de naissance</title>
+<meta name="description" content="Effectuez vos démarches administratives en ligne : demande de carte d'identité, inscription sur les listes électorales et demande d'acte de naissance.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://charlenehourdin.github.io/servicepublic/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes démarches en ligne">
+<meta property="og:title" content="Mes démarches en ligne — Démarches administratives">
+<meta property="og:description" content="Carte d'identité, listes électorales et acte de naissance : réalisez vos démarches en ligne.">
+<meta property="og:url" content="https://charlenehourdin.github.io/servicepublic/">
+<meta property="og:image" content="https://charlenehourdin.github.io/servicepublic/img/hero-illustration.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mes démarches en ligne">
+<meta name="twitter:description" content="Effectuez vos démarches administratives en ligne.">
+<meta name="twitter:image" content="https://charlenehourdin.github.io/servicepublic/img/hero-illustration.jpg">
+<link rel="preload" href="fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/archivo-expanded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Mes démarches en ligne",
+      "url": "https://charlenehourdin.github.io/servicepublic/",
+      "description": "Portail de démonstration pour effectuer des démarches administratives en ligne.",
+      "inLanguage": "fr-FR",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://charlenehourdin.github.io/servicepublic/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "République Démo",
+      "url": "https://charlenehourdin.github.io/servicepublic/"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-<div class="bandeau-tricolore"><span></span><span></span><span></span></div>
+<a class="skiplink" href="#contenu-principal">Aller au contenu</a>
+
+<div class="bandeau-tricolore" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <header class="site-header">
   <div class="header-inner">
@@ -17,42 +60,45 @@
       <span class="logo-rf">RÉPUBLIQUE<br><strong>FRANÇAISE</strong></span>
       <span class="nom-service">Mes démarches en ligne</span>
     </a>
-    <nav class="nav-principale">
+    <nav class="nav-principale" aria-label="Navigation principale">
       <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#actualites">Actualités</a></li>
-        <li><a href="index.html#aide">Aide</a></li>
+        <li><a href="index.html" aria-current="page">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#actualites">Actualités</a></li>
+        <li><a href="#aide">Aide</a></li>
       </ul>
     </nav>
-    <div class="compte-utilisateur">
-      <div class="avatar-utilisateur">CM</div>
+    <div class="compte-utilisateur" aria-label="Compte connecté : Claire Martin">
+      <div class="avatar-utilisateur" aria-hidden="true">CM</div>
       <span>Claire Martin</span>
     </div>
   </div>
 </header>
 
-<section class="hero">
+<main id="contenu-principal">
+
+<section class="hero" aria-labelledby="titre-hero">
   <div class="hero-inner">
     <div>
-      <h1>Toutes vos démarches administratives, en un seul endroit</h1>
+      <h1 id="titre-hero">Toutes vos démarches administratives, en un seul endroit</h1>
       <p class="intro">Demandez une carte d'identité, inscrivez-vous sur les listes électorales ou obtenez un acte de naissance — sans vous déplacer, à votre rythme.</p>
-      <form class="barre-recherche" onsubmit="return false;">
-        <input type="text" placeholder="Rechercher une démarche (ex : passeport, état civil…)" aria-label="Rechercher une démarche">
+      <form class="barre-recherche" role="search" action="index.html" method="get" onsubmit="return false;">
+        <label class="visually-hidden" for="recherche-demarche">Rechercher une démarche</label>
+        <input type="search" id="recherche-demarche" name="q" placeholder="Rechercher une démarche (ex : passeport, état civil…)" autocomplete="off">
         <button type="submit">Rechercher</button>
       </form>
     </div>
     <div class="hero-media">
-      <img src="img/hero-illustration.jpg" alt="Illustration d'un espace personnel de démarches en ligne" style="width:100%;display:block;">
+      <img src="img/hero-illustration.jpg" alt="Espace personnel de démarches en ligne sur un écran" width="1600" height="1200" fetchpriority="high">
     </div>
   </div>
 </section>
 
-<div class="chiffres-cles">
+<section class="chiffres-cles" aria-label="Chiffres clés">
   <div class="conteneur">
     <div class="chiffres-grid">
       <div>
-        <div class="chiffre" data-compteur-live>184 320</div>
+        <div class="chiffre">184 320</div>
         <div class="chiffre-label">démarches effectuées en ligne aujourd'hui</div>
       </div>
       <div>
@@ -64,137 +110,145 @@
         <div class="chiffre-label">accès à votre espace personnel</div>
       </div>
       <div>
-        <div class="chiffre">~12 min</div>
+        <div class="chiffre">~8 min</div>
         <div class="chiffre-label">durée moyenne d'une démarche</div>
       </div>
     </div>
   </div>
-</div>
-
-<section id="services" class="conteneur">
-  <div class="section-titre">
-    <h2>Vos services en ligne</h2>
-    <a class="lien-tout" href="#">Voir toutes les démarches →</a>
-  </div>
-
-  <div class="grille-services">
-
-    <a class="carte-service" href="pages/carte-identite/etape-1.html">
-      <div class="pictogramme">🪪</div>
-      <span class="badge-duree">≈ 15 min · pièces à fournir</span>
-      <h3>Demande de carte nationale d'identité</h3>
-      <p>Faites votre première demande ou un renouvellement de carte d'identité. Photo et justificatif de domicile à téléverser.</p>
-      <span class="fleche">Commencer la démarche →</span>
-    </a>
-
-    <a class="carte-service" href="pages/inscription-electorale/etape-1.html">
-      <div class="pictogramme">🗳️</div>
-      <span class="badge-duree">≈ 8 min · exemples fournis</span>
-      <h3>Inscription sur les listes électorales</h3>
-      <p>Inscrivez-vous pour pouvoir voter aux prochaines élections. Des exemples de pièces justificatives vous guident pas à pas.</p>
-      <span class="fleche">Commencer la démarche →</span>
-    </a>
-
-    <a class="carte-service" href="pages/acte-naissance/etape-1.html">
-      <div class="pictogramme">📄</div>
-      <span class="badge-duree">≈ 5 min</span>
-      <h3>Demande d'acte de naissance</h3>
-      <p>Obtenez une copie ou un extrait d'acte de naissance, à usage personnel ou administratif.</p>
-      <span class="fleche">Commencer la démarche →</span>
-    </a>
-
-  </div>
 </section>
 
-<section id="actualites" class="conteneur">
+<section id="services" class="conteneur" aria-labelledby="titre-services">
   <div class="section-titre">
-    <h2>Actualités</h2>
+    <h2 id="titre-services">Vos services en ligne</h2>
+    <a class="lien-tout" href="#services">Voir toutes les démarches</a>
+  </div>
+
+  <ul class="grille-services">
+    <li>
+      <a class="carte-service" href="pages/carte-identite/etape-1.html">
+        <div class="pictogramme" aria-hidden="true">🪪</div>
+        <span class="badge-duree">≈ 10 min · pièces à fournir</span>
+        <h3>Demande de carte nationale d'identité</h3>
+        <p>Faites votre première demande ou un renouvellement de carte d'identité. Photo et justificatif de domicile à téléverser.</p>
+        <span class="fleche">Commencer la démarche</span>
+      </a>
+    </li>
+    <li>
+      <a class="carte-service" href="pages/inscription-electorale/etape-1.html">
+        <div class="pictogramme" aria-hidden="true">🗳️</div>
+        <span class="badge-duree">≈ 6 min · exemples fournis</span>
+        <h3>Inscription sur les listes électorales</h3>
+        <p>Inscrivez-vous pour pouvoir voter aux prochaines élections. Des exemples de pièces justificatives vous guident pas à pas.</p>
+        <span class="fleche">Commencer la démarche</span>
+      </a>
+    </li>
+    <li>
+      <a class="carte-service" href="pages/acte-naissance/etape-1.html">
+        <div class="pictogramme" aria-hidden="true">📄</div>
+        <span class="badge-duree">≈ 3 min</span>
+        <h3>Demande d'acte de naissance</h3>
+        <p>Obtenez une copie ou un extrait d'acte de naissance, à usage personnel ou administratif.</p>
+        <span class="fleche">Commencer la démarche</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<section id="actualites" class="conteneur" aria-labelledby="titre-actualites">
+  <div class="section-titre">
+    <h2 id="titre-actualites">Actualités</h2>
   </div>
   <div class="bloc-actus">
     <article class="carte-actu">
-      <img src="img/actu-1.jpg" alt="">
+      <img src="img/actu-1.jpg" alt="Calendrier électoral et urne de vote" width="1920" height="1280" loading="lazy">
       <div class="contenu">
-        <h4>Élections 2026 : les dates clés de l'inscription</h4>
+        <h3>Élections 2026 : les dates clés de l'inscription</h3>
         <p>Retrouvez le calendrier complet pour vous inscrire à temps sur les listes électorales.</p>
       </div>
     </article>
     <article class="carte-actu">
-      <img src="img/actu-2.jpg" alt="">
+      <img src="img/actu-2.jpg" alt="Guichet d'accueil d'une administration" width="1920" height="1280" loading="lazy">
       <div class="contenu">
-        <h4>Nouveaux horaires des guichets de proximité</h4>
+        <h3>Nouveaux horaires des guichets de proximité</h3>
         <p>Les horaires d'accueil évoluent à partir du mois prochain dans plusieurs antennes.</p>
       </div>
     </article>
     <article class="carte-actu">
-      <img src="img/actu-3.jpg" alt="">
+      <img src="img/actu-3.jpg" alt="Personne effectuant une démarche sur un ordinateur" width="1920" height="1280" loading="lazy">
       <div class="contenu">
-        <h4>Simplification des démarches en ligne</h4>
+        <h3>Simplification des démarches en ligne</h3>
         <p>Moins de pièces justificatives demandées pour certaines démarches courantes.</p>
       </div>
     </article>
   </div>
 </section>
 
-<div class="bandeau-partenaires">
+<aside class="bandeau-partenaires" aria-label="Organismes partenaires">
   <div class="piste-logos">
-    <img src="img/logo-1.png" alt="Ministère X"><img src="img/logo-2.png" alt="Région Y">
-    <img src="img/logo-3.png" alt="Caisse Z"><img src="img/logo-4.png" alt="Agence A">
-    <img src="img/logo-5.png" alt="Office B"><img src="img/logo-6.png" alt="Préfecture C">
-    <img src="img/logo-1.png" alt="Ministère X"><img src="img/logo-2.png" alt="Région Y">
-    <img src="img/logo-3.png" alt="Caisse Z"><img src="img/logo-4.png" alt="Agence A">
-    <img src="img/logo-5.png" alt="Office B"><img src="img/logo-6.png" alt="Préfecture C">
+    <img src="img/logo-1.png" alt="Ministère X" width="400" height="160" loading="lazy">
+    <img src="img/logo-2.png" alt="Région Y" width="400" height="160" loading="lazy">
+    <img src="img/logo-3.png" alt="Caisse Z" width="400" height="160" loading="lazy">
+    <img src="img/logo-4.png" alt="Agence A" width="400" height="160" loading="lazy">
+    <img src="img/logo-5.png" alt="Office B" width="400" height="160" loading="lazy">
+    <img src="img/logo-6.png" alt="Préfecture C" width="400" height="160" loading="lazy">
+    <img src="img/logo-1.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
+    <img src="img/logo-2.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
+    <img src="img/logo-3.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
+    <img src="img/logo-4.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
+    <img src="img/logo-5.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
+    <img src="img/logo-6.png" alt="" width="400" height="160" loading="lazy" aria-hidden="true">
   </div>
-</div>
+</aside>
 
-<section id="aide" class="conteneur">
-  <div class="section-titre"><h2>Besoin d'aide ?</h2></div>
-  <p style="max-width:680px;color:#444;">Notre assistance est disponible par téléphone et par messagerie pour vous accompagner dans vos démarches. Vous pouvez aussi consulter les questions fréquentes pour chaque service depuis sa page de présentation.</p>
+<section id="aide" class="conteneur" aria-labelledby="titre-aide">
+  <div class="section-titre"><h2 id="titre-aide">Besoin d'aide ?</h2></div>
+  <p class="texte-aide">Notre assistance est disponible par téléphone et par messagerie pour vous accompagner dans vos démarches. Vous pouvez aussi consulter les questions fréquentes pour chaque service depuis sa page de présentation.</p>
 </section>
+
+</main>
 
 <footer class="site-footer">
   <div class="conteneur">
     <div class="footer-grid">
       <div>
-        <h4>Le site</h4>
+        <h2>Le site</h2>
         <ul>
-          <li><a href="#">Qui sommes-nous</a></li>
-          <li><a href="#">Accessibilité : non conforme</a></li>
-          <li><a href="#">Mentions légales</a></li>
-          <li><a href="#">Données personnelles</a></li>
+          <li><a href="#aide">Qui sommes-nous</a></li>
+          <li><a href="#aide">Accessibilité : partiellement conforme</a></li>
+          <li><a href="#aide">Mentions légales</a></li>
+          <li><a href="#aide">Données personnelles</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Services</h4>
+      <nav aria-label="Services dans le pied de page">
+        <h2>Services</h2>
         <ul>
           <li><a href="pages/carte-identite/etape-1.html">Carte d'identité</a></li>
           <li><a href="pages/inscription-electorale/etape-1.html">Listes électorales</a></li>
           <li><a href="pages/acte-naissance/etape-1.html">Acte de naissance</a></li>
         </ul>
-      </div>
+      </nav>
       <div>
-        <h4>Aide</h4>
+        <h2>Aide</h2>
         <ul>
-          <li><a href="#">Questions fréquentes</a></li>
-          <li><a href="#">Contacter l'assistance</a></li>
+          <li><a href="#aide">Questions fréquentes</a></li>
+          <li><a href="#aide">Contacter l'assistance</a></li>
         </ul>
       </div>
       <div>
-        <h4>Suivez-nous</h4>
+        <h2>Suivez-nous</h2>
         <ul>
-          <li><a href="#">Réseau social A</a></li>
-          <li><a href="#">Réseau social B</a></li>
-          <li><a href="#">Lettre d'information</a></li>
+          <li><a href="#aide">Réseau social A</a></li>
+          <li><a href="#aide">Réseau social B</a></li>
+          <li><a href="#aide">Lettre d'information</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bas">
       <span>© République Démo — site fictif à usage pédagogique</span>
-      <span>Plan du site · Cookies · Contact</span>
+      <span><a href="#contenu-principal">Plan du site</a> · <a href="#aide">Cookies</a> · <a href="#aide">Contact</a></span>
     </div>
   </div>
 </footer>
-
-<img src="img/mascotte.png" class="mascotte-flottante" alt="" aria-hidden="true">
 
 <script src="js/main.js"></script>
 </body>

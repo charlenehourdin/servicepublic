@@ -3,12 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demande de carte d'identité — Mes démarches en ligne</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Demande de carte nationale d'identité — Mes démarches en ligne</title>
+<meta name="description" content="Demandez ou renouvelez votre carte nationale d'identité en ligne. Téléversez votre photo et votre justificatif de domicile.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://charlenehourdin.github.io/servicepublic/pages/carte-identite/etape-1.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Demande de carte nationale d'identité">
+<meta property="og:description" content="Effectuez votre demande de carte d'identité en ligne en quelques étapes.">
+<meta property="og:url" content="https://charlenehourdin.github.io/servicepublic/pages/carte-identite/etape-1.html">
+<link rel="preload" href="../../fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/archivo-expanded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
-<div class="bandeau-tricolore"><span></span><span></span><span></span></div>
+<a class="skiplink" href="#contenu-principal">Aller au contenu</a>
+
+<div class="bandeau-tricolore" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <header class="site-header">
   <div class="header-inner">
@@ -16,50 +30,52 @@
       <span class="logo-rf">RÉPUBLIQUE<br><strong>FRANÇAISE</strong></span>
       <span class="nom-service">Mes démarches en ligne</span>
     </a>
-    <nav class="nav-principale">
+    <nav class="nav-principale" aria-label="Navigation principale">
       <ul>
         <li><a href="../../index.html">Accueil</a></li>
         <li><a href="../../index.html#services">Services</a></li>
         <li><a href="../../index.html#aide">Aide</a></li>
       </ul>
     </nav>
-    <div class="compte-utilisateur">
-      <div class="avatar-utilisateur">CM</div>
+    <div class="compte-utilisateur" aria-label="Compte connecté : Claire Martin">
+      <div class="avatar-utilisateur" aria-hidden="true">CM</div>
       <span>Claire Martin</span>
     </div>
   </div>
 </header>
 
+<main id="contenu-principal">
+
 <div class="entete-service">
   <div class="conteneur">
-    <div class="fil-ariane"><a href="../../index.html">Accueil</a> › <a href="../../index.html#services">Services</a> › Carte d'identité</div>
+    <nav class="fil-ariane" aria-label="Fil d'Ariane">
+      <a href="../../index.html">Accueil</a> › <a href="../../index.html#services">Services</a> › <span aria-current="page">Carte d'identité</span>
+    </nav>
     <h1>Demande de carte nationale d'identité</h1>
     <div class="meta">
-      <span>⏱ Durée estimée : 15 minutes</span>
-      <span>📎 Pièces à téléverser</span>
-      <span>💾 Progression non sauvegardée</span>
+      <span>Durée estimée : 10 minutes</span>
+      <span>Pièces à téléverser (max. 5 Mo)</span>
+      <span>3 étapes</span>
     </div>
   </div>
 </div>
 
 <div class="zone-formulaire">
 
-  <div class="stepper">
-    <div class="step actif" data-step="1"><div class="rond">1</div>Identité</div>
-    <div class="step" data-step="2"><div class="rond">2</div>État civil</div>
-    <div class="step" data-step="3"><div class="rond">3</div>Pièces justificatives</div>
-    <div class="step" data-step="4"><div class="rond">4</div>Récapitulatif</div>
-  </div>
+  <ol class="stepper" aria-label="Étapes de la démarche">
+    <li class="step actif" data-step="1" aria-current="step"><div class="rond" aria-hidden="true">1</div>Identité &amp; adresse</li>
+    <li class="step" data-step="2"><div class="rond" aria-hidden="true">2</div>Pièces</li>
+    <li class="step" data-step="3"><div class="rond" aria-hidden="true">3</div>Récapitulatif</li>
+  </ol>
 
-  <!-- ÉCRAN 1 : Identité -->
-  <div id="etape-1" class="ecran-etape actif">
+  <div id="etape-1" class="ecran-etape actif" aria-labelledby="titre-etape-1">
     <div class="carte-etape">
-      <h2>Vos informations d'identité</h2>
-      <p class="sous-titre">Renseignez votre identité telle qu'elle figure sur votre carte d'identité actuelle ou votre acte de naissance.</p>
+      <h2 id="titre-etape-1">Vos informations</h2>
+      <p class="sous-titre">Identité et adresse telles qu'elles figurent sur vos documents officiels.</p>
 
       <div class="groupe-champ">
         <label for="civilite">Civilité</label>
-        <select id="civilite">
+        <select id="civilite" name="civilite" autocomplete="sex">
           <option>Madame</option>
           <option>Monsieur</option>
         </select>
@@ -68,115 +84,101 @@
       <div class="ligne-deux">
         <div class="groupe-champ">
           <label for="nom">Nom de naissance</label>
-          <input type="text" id="nom">
+          <input type="text" id="nom" name="nom" autocomplete="family-name">
         </div>
         <div class="groupe-champ">
           <label for="prenom">Prénom(s)</label>
-          <input type="text" id="prenom">
+          <input type="text" id="prenom" name="prenom" autocomplete="given-name">
         </div>
       </div>
 
       <div class="groupe-champ">
         <label for="nom-usage">Nom d'usage (si différent)</label>
-        <input type="text" id="nom-usage">
-        <div class="aide">Laissez vide si vous utilisez votre nom de naissance.</div>
+        <input type="text" id="nom-usage" name="nom-usage" autocomplete="additional-name">
       </div>
 
       <div class="ligne-deux">
         <div class="groupe-champ">
           <label for="date-naissance">Date de naissance</label>
-          <input type="date" id="date-naissance">
+          <input type="date" id="date-naissance" name="date-naissance" autocomplete="bday">
         </div>
         <div class="groupe-champ">
           <label for="lieu-naissance">Lieu de naissance</label>
-          <input type="text" id="lieu-naissance">
+          <input type="text" id="lieu-naissance" name="lieu-naissance">
         </div>
       </div>
 
-      <div class="actions-etape">
-        <span></span>
-        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(2)">Continuer →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ÉCRAN 2 : État civil / adresse -->
-  <div id="etape-2" class="ecran-etape">
-    <div class="carte-etape">
-      <h2>Votre situation et votre adresse</h2>
-      <p class="sous-titre">Ces informations doivent correspondre à votre justificatif de domicile.</p>
-
       <div class="groupe-champ">
         <label for="adresse">Adresse</label>
-        <input type="text" id="adresse">
+        <input type="text" id="adresse" name="adresse" autocomplete="street-address">
       </div>
 
       <div class="ligne-deux">
         <div class="groupe-champ">
           <label for="cp">Code postal</label>
-          <input type="text" id="cp">
+          <input type="text" id="cp" name="cp" autocomplete="postal-code" inputmode="numeric">
         </div>
         <div class="groupe-champ">
           <label for="ville">Ville</label>
-          <input type="text" id="ville">
+          <input type="text" id="ville" name="ville" autocomplete="address-level2">
         </div>
       </div>
 
-      <div class="groupe-champ">
-        <label for="situation">Situation familiale</label>
-        <select id="situation">
-          <option>Célibataire</option>
-          <option>Marié(e)</option>
-          <option>Pacsé(e)</option>
-          <option>Divorcé(e)</option>
-          <option>Veuf/Veuve</option>
-        </select>
-      </div>
-
-      <div class="groupe-champ">
-        <label for="telephone">Téléphone</label>
-        <input type="tel" id="telephone">
+      <div class="ligne-deux">
+        <div class="groupe-champ">
+          <label for="situation">Situation familiale</label>
+          <select id="situation" name="situation">
+            <option>Célibataire</option>
+            <option>Marié(e)</option>
+            <option>Pacsé(e)</option>
+            <option>Divorcé(e)</option>
+            <option>Veuf/Veuve</option>
+          </select>
+        </div>
+        <div class="groupe-champ">
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" name="telephone" autocomplete="tel">
+        </div>
       </div>
 
       <div class="actions-etape">
-        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(1)">← Retour</button>
-        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(3)">Continuer →</button>
+        <span></span>
+        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(2)">Continuer</button>
       </div>
     </div>
   </div>
 
-  <!-- ÉCRAN 3 : Pièces justificatives (upload) -->
-  <div id="etape-3" class="ecran-etape">
+  <div id="etape-2" class="ecran-etape" aria-labelledby="titre-etape-2" aria-hidden="true" inert>
     <div class="carte-etape">
-      <h2>Pièces justificatives</h2>
-      <p class="sous-titre">Téléversez une photo d'identité récente et votre justificatif de domicile. Les fichiers sont conservés tels que vous les envoyez, sans compression.</p>
+      <h2 id="titre-etape-2">Pièces justificatives</h2>
+      <p class="sous-titre">Téléversez une photo d'identité récente et votre justificatif de domicile. Taille maximale : <strong>5 Mo</strong> par fichier.</p>
 
       <div class="groupe-champ">
-        <label>Photo d'identité et justificatif de domicile</label>
-        <div class="zone-upload">
-          <div class="icone">📤</div>
+        <label for="input-fichier">Photo d'identité et justificatif de domicile</label>
+        <div class="zone-upload" aria-label="Zone de dépôt de fichiers">
+          <div class="icone" aria-hidden="true">📤</div>
           <p><strong>Cliquez pour sélectionner vos fichiers</strong> ou glissez-les ici</p>
-          <div class="formats">Formats acceptés : JPG, PNG, PDF, HEIC, TIFF — sans limite de taille indiquée</div>
+          <div class="formats" id="formats-fichier">Formats : JPG, PNG, PDF — max. 5 Mo par fichier</div>
         </div>
-        <input type="file" id="input-fichier" multiple style="display:none">
-        <div class="liste-fichiers"></div>
-        <div class="aide">Astuce : si votre photo prise au téléphone est très volumineuse, elle sera tout de même acceptée et envoyée dans sa résolution d'origine.</div>
+        <input type="file" id="input-fichier" name="fichiers" multiple accept="image/jpeg,image/png,application/pdf" class="visually-hidden" aria-describedby="formats-fichier info-poids-cni">
+        <p class="info-poids" id="info-poids-cni" data-poids-selection>Aucun fichier · max. 5 Mo par fichier</p>
+        <div class="alerte-upload" data-alerte-upload hidden role="alert"></div>
+        <div class="liste-fichiers" role="list" aria-live="polite" aria-label="Fichiers sélectionnés"></div>
       </div>
 
       <div class="actions-etape">
-        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(2)">← Retour</button>
-        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(4)">Continuer →</button>
+        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(1)">Retour</button>
+        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(3)">Continuer</button>
       </div>
     </div>
   </div>
 
-  <!-- ÉCRAN 4 : Récapitulatif -->
-  <div id="etape-4" class="ecran-etape">
+  <div id="etape-3" class="ecran-etape" aria-labelledby="titre-etape-3" aria-hidden="true" inert>
     <div class="carte-etape">
-      <h2>Vérifiez votre dossier</h2>
-      <p class="sous-titre">Relisez les informations avant l'envoi définitif. Toute erreur après validation nécessitera de recommencer la démarche depuis le début.</p>
+      <h2 id="titre-etape-3">Vérifiez votre dossier</h2>
+      <p class="sous-titre">Relisez les informations avant l'envoi définitif.</p>
 
-      <div class="recapitulatif">
+      <div class="recapitulatif" aria-label="Récapitulatif du dossier">
         <div class="recap-ligne"><span class="label">Nom</span><span class="valeur">Martin</span></div>
         <div class="recap-ligne"><span class="label">Prénom</span><span class="valeur">Claire</span></div>
         <div class="recap-ligne"><span class="label">Date de naissance</span><span class="valeur">14/03/1990</span></div>
@@ -185,41 +187,42 @@
       </div>
 
       <div class="groupe-champ">
-        <label><input type="checkbox" checked style="width:auto;margin-right:8px;">J'atteste de l'exactitude des informations fournies.</label>
+        <label for="attestation-cni"><input type="checkbox" id="attestation-cni" name="attestation" checked> J'atteste de l'exactitude des informations fournies.</label>
+      </div>
+
+      <div class="progress-wrap" data-progress-wrap hidden>
+        <p class="progress-label" id="label-progress-cni">Envoi du dossier en cours…</p>
+        <div class="progress-track" role="progressbar" aria-labelledby="label-progress-cni" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar" data-progress-bar></div>
+        </div>
       </div>
 
       <div class="actions-etape">
-        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(3)">← Retour</button>
+        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(2)">Retour</button>
         <button class="bouton bouton-primaire" id="bouton-soumettre" type="button" onclick="soumettreDossier('CNI')">Envoyer ma demande</button>
       </div>
     </div>
   </div>
 
-  <!-- ÉCRAN 99 : Confirmation -->
-  <div id="etape-99" class="ecran-etape">
+  <div id="etape-99" class="ecran-etape" aria-labelledby="titre-confirmation" aria-hidden="true" inert>
     <div class="carte-etape bandeau-confirmation">
-      <div class="icone-ok">✓</div>
-      <h2>Votre demande a bien été envoyée</h2>
+      <div class="icone-ok" aria-hidden="true">✓</div>
+      <h2 id="titre-confirmation">Votre demande a bien été envoyée</h2>
       <p>Vous recevrez un courriel de confirmation. Votre numéro de suivi de dossier :</p>
-      <div class="numero-dossier" data-numero-dossier>—</div>
-      <p style="margin-top:20px;"><a class="bouton bouton-secondaire" href="../../index.html">Retour à l'accueil</a></p>
+      <div class="numero-dossier" data-numero-dossier aria-live="polite">—</div>
+      <p class="actions-confirmation"><a class="bouton bouton-secondaire" href="../../index.html">Retour à l'accueil</a></p>
     </div>
   </div>
 
 </div>
+
+</main>
 
 <footer class="site-footer">
   <div class="conteneur footer-bas" style="border-top:none;">
     <span>© République Démo — site fictif à usage pédagogique</span>
   </div>
 </footer>
-
-<img src="../../img/mascotte.png" class="mascotte-flottante" alt="" aria-hidden="true">
-
-<style>
-.ecran-etape{display:none;}
-.ecran-etape.actif{display:block;}
-</style>
 
 <script src="../../js/main.js"></script>
 </body>

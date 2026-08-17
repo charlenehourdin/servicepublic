@@ -3,12 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Demande d'acte de naissance — Mes démarches en ligne</title>
+<meta name="description" content="Demandez une copie ou un extrait d'acte de naissance en ligne, avec envoi postal ou numérique.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://charlenehourdin.github.io/servicepublic/pages/acte-naissance/etape-1.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Demande d'acte de naissance">
+<meta property="og:description" content="Obtenez une copie ou un extrait d'acte de naissance en ligne.">
+<meta property="og:url" content="https://charlenehourdin.github.io/servicepublic/pages/acte-naissance/etape-1.html">
+<link rel="preload" href="../../fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/archivo-expanded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
-<div class="bandeau-tricolore"><span></span><span></span><span></span></div>
+<a class="skiplink" href="#contenu-principal">Aller au contenu</a>
+
+<div class="bandeau-tricolore" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <header class="site-header">
   <div class="header-inner">
@@ -16,104 +30,102 @@
       <span class="logo-rf">RÉPUBLIQUE<br><strong>FRANÇAISE</strong></span>
       <span class="nom-service">Mes démarches en ligne</span>
     </a>
-    <nav class="nav-principale">
+    <nav class="nav-principale" aria-label="Navigation principale">
       <ul>
         <li><a href="../../index.html">Accueil</a></li>
         <li><a href="../../index.html#services">Services</a></li>
         <li><a href="../../index.html#aide">Aide</a></li>
       </ul>
     </nav>
-    <div class="compte-utilisateur">
-      <div class="avatar-utilisateur">CM</div>
+    <div class="compte-utilisateur" aria-label="Compte connecté : Claire Martin">
+      <div class="avatar-utilisateur" aria-hidden="true">CM</div>
       <span>Claire Martin</span>
     </div>
   </div>
 </header>
 
+<main id="contenu-principal">
+
 <div class="entete-service">
   <div class="conteneur">
-    <div class="fil-ariane"><a href="../../index.html">Accueil</a> › <a href="../../index.html#services">Services</a> › Acte de naissance</div>
+    <nav class="fil-ariane" aria-label="Fil d'Ariane">
+      <a href="../../index.html">Accueil</a> › <a href="../../index.html#services">Services</a> › <span aria-current="page">Acte de naissance</span>
+    </nav>
     <h1>Demande d'acte de naissance</h1>
     <div class="meta">
-      <span>⏱ Durée estimée : 5 minutes</span>
-      <span>📨 Envoi postal ou numérique</span>
-      <span>💾 Progression non sauvegardée</span>
+      <span>Durée estimée : 3 minutes</span>
+      <span>Envoi postal ou numérique</span>
+      <span>2 étapes</span>
     </div>
   </div>
 </div>
 
 <div class="zone-formulaire">
 
-  <div class="stepper">
-    <div class="step actif" data-step="1"><div class="rond">1</div>Bénéficiaire</div>
-    <div class="step" data-step="2"><div class="rond">2</div>Type de document</div>
-    <div class="step" data-step="3"><div class="rond">3</div>Récapitulatif</div>
-  </div>
+  <ol class="stepper" aria-label="Étapes de la démarche">
+    <li class="step actif" data-step="1" aria-current="step"><div class="rond" aria-hidden="true">1</div>Demande</li>
+    <li class="step" data-step="2"><div class="rond" aria-hidden="true">2</div>Récapitulatif</li>
+  </ol>
 
-  <!-- ÉCRAN 1 : identité du bénéficiaire -->
-  <div id="etape-1" class="ecran-etape actif">
+  <div id="etape-1" class="ecran-etape actif" aria-labelledby="titre-etape-1">
     <div class="carte-etape">
-      <h2>Pour qui demandez-vous cet acte ?</h2>
-      <p class="sous-titre">Indiquez l'identité de la personne concernée par l'acte de naissance.</p>
+      <h2 id="titre-etape-1">Votre demande</h2>
+      <p class="sous-titre">Indiquez l'identité du bénéficiaire et le type d'acte souhaité.</p>
 
       <div class="ligne-deux">
         <div class="groupe-champ">
           <label for="nom">Nom de naissance</label>
-          <input type="text" id="nom">
+          <input type="text" id="nom" name="nom" autocomplete="family-name">
         </div>
         <div class="groupe-champ">
           <label for="prenom">Prénom(s)</label>
-          <input type="text" id="prenom">
+          <input type="text" id="prenom" name="prenom" autocomplete="given-name">
         </div>
       </div>
 
       <div class="ligne-deux">
         <div class="groupe-champ">
           <label for="date-naissance">Date de naissance</label>
-          <input type="date" id="date-naissance">
+          <input type="date" id="date-naissance" name="date-naissance" autocomplete="bday">
         </div>
         <div class="groupe-champ">
           <label for="lieu-naissance">Commune de naissance</label>
-          <input type="text" id="lieu-naissance">
+          <input type="text" id="lieu-naissance" name="lieu-naissance">
         </div>
       </div>
 
-      <div class="groupe-champ">
-        <label for="nom-pere">Nom et prénom du père</label>
-        <input type="text" id="nom-pere" placeholder="Tel qu'indiqué sur l'acte d'origine">
-        <div class="aide">Cette information sera redemandée à l'étape suivante pour confirmation.</div>
+      <div class="ligne-deux">
+        <div class="groupe-champ">
+          <label for="nom-pere">Nom et prénom du père</label>
+          <input type="text" id="nom-pere" name="nom-pere">
+        </div>
+        <div class="groupe-champ">
+          <label for="nom-mere">Nom et prénom de la mère</label>
+          <input type="text" id="nom-mere" name="nom-mere">
+        </div>
       </div>
 
-      <div class="groupe-champ">
-        <label for="nom-mere">Nom et prénom de la mère</label>
-        <input type="text" id="nom-mere" placeholder="Tel qu'indiqué sur l'acte d'origine">
-      </div>
-
-      <div class="actions-etape">
-        <span></span>
-        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(2)">Continuer →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ÉCRAN 2 : type de document + reconfirmation (redondance volontaire) -->
-  <div id="etape-2" class="ecran-etape">
-    <div class="carte-etape">
-      <h2>Type de document et confirmation</h2>
-      <p class="sous-titre">Choisissez le document souhaité. Merci de reconfirmer les noms des parents pour validation du dossier.</p>
-
-      <div class="groupe-champ">
-        <label for="type-acte">Type d'acte demandé</label>
-        <select id="type-acte">
-          <option>Copie intégrale</option>
-          <option>Extrait avec filiation</option>
-          <option>Extrait sans filiation</option>
-        </select>
+      <div class="ligne-deux">
+        <div class="groupe-champ">
+          <label for="type-acte">Type d'acte demandé</label>
+          <select id="type-acte" name="type-acte">
+            <option>Copie intégrale</option>
+            <option>Extrait avec filiation</option>
+            <option>Extrait sans filiation</option>
+          </select>
+        </div>
+        <div class="groupe-champ">
+          <label for="mode-envoi">Mode de réception</label>
+          <select id="mode-envoi" name="mode-envoi">
+            <option>Courrier postal</option>
+            <option>Téléchargement numérique</option>
+          </select>
+        </div>
       </div>
 
       <div class="groupe-champ">
         <label for="motif">Motif de la demande</label>
-        <select id="motif">
+        <select id="motif" name="motif">
           <option>Démarche administrative</option>
           <option>Mariage</option>
           <option>Naturalisation</option>
@@ -121,38 +133,18 @@
         </select>
       </div>
 
-      <div class="ligne-deux">
-        <div class="groupe-champ">
-          <label for="nom-pere-2">Confirmer le nom et prénom du père</label>
-          <input type="text" id="nom-pere-2" placeholder="Ressaisir l'information">
-        </div>
-        <div class="groupe-champ">
-          <label for="nom-mere-2">Confirmer le nom et prénom de la mère</label>
-          <input type="text" id="nom-mere-2" placeholder="Ressaisir l'information">
-        </div>
-      </div>
-
-      <div class="groupe-champ">
-        <label for="mode-envoi">Mode de réception</label>
-        <select id="mode-envoi">
-          <option>Courrier postal</option>
-          <option>Téléchargement numérique</option>
-        </select>
-      </div>
-
       <div class="actions-etape">
-        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(1)">← Retour</button>
-        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(3)">Continuer →</button>
+        <span></span>
+        <button class="bouton bouton-primaire" type="button" onclick="allerEtape(2)">Continuer</button>
       </div>
     </div>
   </div>
 
-  <!-- ÉCRAN 3 : Récapitulatif -->
-  <div id="etape-3" class="ecran-etape">
+  <div id="etape-2" class="ecran-etape" aria-labelledby="titre-etape-2" aria-hidden="true" inert>
     <div class="carte-etape">
-      <h2>Vérifiez votre demande</h2>
+      <h2 id="titre-etape-2">Vérifiez votre demande</h2>
 
-      <div class="recapitulatif">
+      <div class="recapitulatif" aria-label="Récapitulatif de la demande">
         <div class="recap-ligne"><span class="label">Bénéficiaire</span><span class="valeur">Claire Martin</span></div>
         <div class="recap-ligne"><span class="label">Né(e) le</span><span class="valeur">14/03/1990 à Toulouse</span></div>
         <div class="recap-ligne"><span class="label">Type d'acte</span><span class="valeur">Copie intégrale</span></div>
@@ -160,41 +152,42 @@
       </div>
 
       <div class="groupe-champ">
-        <label><input type="checkbox" checked style="width:auto;margin-right:8px;">Je certifie l'exactitude de ces informations.</label>
+        <label for="attestation-naiss"><input type="checkbox" id="attestation-naiss" name="attestation" checked> Je certifie l'exactitude de ces informations.</label>
+      </div>
+
+      <div class="progress-wrap" data-progress-wrap hidden>
+        <p class="progress-label" id="label-progress-naiss">Envoi de la demande en cours…</p>
+        <div class="progress-track" role="progressbar" aria-labelledby="label-progress-naiss" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar" data-progress-bar></div>
+        </div>
       </div>
 
       <div class="actions-etape">
-        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(2)">← Retour</button>
+        <button class="bouton bouton-secondaire" type="button" onclick="allerEtape(1)">Retour</button>
         <button class="bouton bouton-primaire" id="bouton-soumettre" type="button" onclick="soumettreDossier('NAISS')">Envoyer ma demande</button>
       </div>
     </div>
   </div>
 
-  <!-- ÉCRAN 99 : Confirmation -->
-  <div id="etape-99" class="ecran-etape">
+  <div id="etape-99" class="ecran-etape" aria-labelledby="titre-confirmation" aria-hidden="true" inert>
     <div class="carte-etape bandeau-confirmation">
-      <div class="icone-ok">✓</div>
-      <h2>Votre demande a bien été envoyée</h2>
+      <div class="icone-ok" aria-hidden="true">✓</div>
+      <h2 id="titre-confirmation">Votre demande a bien été envoyée</h2>
       <p>Votre numéro de suivi de dossier :</p>
-      <div class="numero-dossier" data-numero-dossier>—</div>
-      <p style="margin-top:20px;"><a class="bouton bouton-secondaire" href="../../index.html">Retour à l'accueil</a></p>
+      <div class="numero-dossier" data-numero-dossier aria-live="polite">—</div>
+      <p class="actions-confirmation"><a class="bouton bouton-secondaire" href="../../index.html">Retour à l'accueil</a></p>
     </div>
   </div>
 
 </div>
+
+</main>
 
 <footer class="site-footer">
   <div class="conteneur footer-bas" style="border-top:none;">
     <span>© République Démo — site fictif à usage pédagogique</span>
   </div>
 </footer>
-
-<img src="../../img/mascotte.png" class="mascotte-flottante" alt="" aria-hidden="true">
-
-<style>
-.ecran-etape{display:none;}
-.ecran-etape.actif{display:block;}
-</style>
 
 <script src="../../js/main.js"></script>
 </body>

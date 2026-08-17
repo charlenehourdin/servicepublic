@@ -1,0 +1,118 @@
+{
+  "categories": {
+    "pageWeight": {
+      "label": "Page weight",
+      "categoryScore": 100,
+      "rules": [
+        "totalWeight",
+        "imageOptimization",
+        "imagesTooLarge",
+        "compression",
+        "fileMinification"
+      ]
+    },
+    "requests": {
+      "label": "Requests",
+      "categoryScore": 100,
+      "rules": [
+        "totalRequests",
+        "domains",
+        "notFound",
+        "identicalFiles",
+        "emptyRequests",
+        "lazyLoadableImagesBelowTheFold",
+        "hiddenImages"
+      ]
+    },
+    "domComplexity": {
+      "label": "DOM complexity",
+      "categoryScore": 100,
+      "rules": [
+        "DOMelementsCount",
+        "DOMelementMaxDepth",
+        "iframesCount",
+        "DOMidDuplicated"
+      ]
+    },
+    "javascriptComplexity": {
+      "label": "JS complexity",
+      "categoryScore": 100,
+      "rules": [
+        "scriptDuration",
+        "DOMaccesses",
+        "eventsScrollBound"
+      ]
+    },
+    "badJavascript": {
+      "label": "Bad JS",
+      "categoryScore": 100,
+      "rules": [
+        "jsErrors",
+        "documentWriteCalls",
+        "synchronousXHR",
+        "globalVariables"
+      ]
+    },
+    "jQuery": {
+      "label": "jQuery",
+      "categoryScore": 100,
+      "rules": [
+        "jQueryVersion",
+        "jQueryVersionsLoaded"
+      ]
+    },
+    "cssComplexity": {
+      "label": "CSS complexity",
+      "categoryScore": 100,
+      "rules": [
+        "cssRules",
+        "cssComplexSelectors",
+        "cssColors",
+        "similarColors",
+        "cssBreakpoints",
+        "cssMobileFirst"
+      ]
+    },
+    "badCSS": {
+      "label": "Bad CSS",
+      "categoryScore": 90,
+      "rules": [
+        "cssParsingErrors",
+        "cssImports",
+        "cssDuplicatedSelectors",
+        "cssDuplicatedProperties",
+        "cssEmptyRules",
+        "cssImportants",
+        "cssOldIEFixes",
+        "cssOldPropertyPrefixes",
+        "cssRedundantBodySelectors",
+        "cssRedundantChildNodesSelectors"
+      ]
+    },
+    "fonts": {
+      "label": "Web fonts",
+      "categoryScore": 85,
+      "rules": [
+        "fontsCount",
+        "heavyFonts",
+        "unusedUnicodeRanges",
+        "nonWoff2Fonts"
+      ]
+    },
+    "serverConfig": {
+      "label": "Server config",
+      "categoryScore": 100,
+      "rules": [
+        "oldHttpProtocol",
+        "oldTlsProtocol",
+        "closedConnections",
+        "cachingNotSpecified",
+        "cachingDisabled",
+        "cachingTooShort"
+      ]
+    }
+  },
+  "globalScore": 98,
+  "runId": "hlfg2trtod",
+  "screenshotUrl": "/api/results/hlfg2trtod/screenshot.jpg"
+}
