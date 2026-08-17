@@ -1,5 +1,5 @@
 {
-    "id": "56f57d53-0831-4a47-b569-d1211b024be9",
+    "id": "44f6c38f-5eb3-4776-aa87-4ecfe098339d",
     "status": "SUCCESS",
     "queue_position": null,
     "tasks_in_progress": 0,
@@ -9,15 +9,15 @@
             "width": 1920,
             "height": 1080,
             "url": "https://charlenehourdin.github.io/servicepublic/pages/carte-identite/etape-1.html",
-            "size": 237.816,
+            "size": 9.603,
             "nodes": 174,
-            "requests": 23,
+            "requests": 3,
             "grade": "A",
-            "score": 85.0,
-            "ges": 1.3,
-            "water": 1.95,
+            "score": 89.0,
+            "ges": 1.22,
+            "water": 1.83,
             "ecoindex_version": "5.10.0",
-            "date": "2026-08-17T15:29:39.880679",
+            "date": "2026-08-17T15:55:51.478348",
             "page_type": null
         },
         "error": null
