@@ -1,14 +1,11 @@
-/* Service Worker — cache des ressources statiques */
-const CACHE = 'servicepublic-v3';
+/* Service Worker — cache des ressources statiques (EcoIndex / GreenIT) */
+const CACHE = 'servicepublic-v4';
 const ASSETS = [
   './',
   './index.html',
-  './css/style.css',
-  './js/main.js',
-  './fonts/source-sans-3-400.woff2',
-  './fonts/source-sans-3-600.woff2',
-  './fonts/source-sans-3-700.woff2',
-  './fonts/archivo-expanded.woff2',
+  './css/style.min.css',
+  './css/print.min.css',
+  './js/main.min.js',
   './img/hero-illustration.jpg',
   './img/logo-1.png',
   './img/logo-2.png',

@@ -1,0 +1,8 @@
+/* Feuille d'impression */
+.skiplink,.bandeau-partenaires,.mascotte-flottante,.site-footer,.compte-utilisateur,nav.nav-principale{display:none!important}
+body{background:#fff;color:#000;font-size:12pt}
+a{color:#000;text-decoration:underline}
+.hero{background:none!important;color:#000!important;padding:0}
+.hero h1,.hero p.intro{color:#000!important}
+.carte-etape,.carte-service,.carte-actu{box-shadow:none;border:1px solid #999}
+.bouton{border:1px solid #000}

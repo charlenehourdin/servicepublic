@@ -1,43 +1,13 @@
 /* =========================================================
    service-public-demo — feuille de style commune
-   Polices utilisées uniquement, hébergées en local (woff2)
+   Polices système (EcoIndex / GreenIT)
    ========================================================= */
 
-@font-face{
-  font-family:'Source Sans 3';
-  src:url('../fonts/source-sans-3-400.woff2') format('woff2');
-  font-weight:400;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:'Source Sans 3';
-  src:url('../fonts/source-sans-3-600.woff2') format('woff2');
-  font-weight:600;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:'Source Sans 3';
-  src:url('../fonts/source-sans-3-700.woff2') format('woff2');
-  font-weight:700;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:'Archivo Expanded';
-  src:url('../fonts/archivo-expanded.woff2') format('woff2');
-  font-weight:700;
-  font-style:normal;
-  font-display:swap;
-}
-@font-face{
-  font-family:'Archivo Expanded';
-  src:url('../fonts/archivo-expanded.woff2') format('woff2');
-  font-weight:800;
-  font-style:normal;
-  font-display:swap;
-}
+
+
+
+
+
 
 :root{
   --bleu-france: #000091;
@@ -85,7 +55,7 @@ button:focus:not(:focus-visible){
 }
 body{
   margin:0;
-  font-family:'Source Sans 3', Arial, sans-serif;
+  font-family:system-ui,sans-serif;
   color:var(--noir);
   background:var(--blanc);
   line-height:1.5;
@@ -93,7 +63,7 @@ body{
 }
 
 h1,h2,h3,h4{
-  font-family:'Archivo Expanded',Arial,sans-serif;
+  font-family:system-ui,sans-serif;
   font-weight:700;
   color:var(--bleu-france);
   margin-top:0;
@@ -139,7 +109,7 @@ header.site-header{
   color:var(--noir);
 }
 .bloc-marque .logo-rf{
-  font-family:'Archivo Expanded';
+  font-family:system-ui,sans-serif;
   font-weight:800;
   font-size:13px;
   line-height:1.15;
@@ -149,7 +119,7 @@ header.site-header{
 }
 .bloc-marque .logo-rf strong{display:block; color:var(--bleu-france);}
 .nom-service{
-  font-family:'Archivo Expanded';
+  font-family:system-ui,sans-serif;
   font-weight:700;
   font-size:20px;
 }
@@ -318,7 +288,7 @@ section{padding:56px 0;}
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;
 }
 .chiffre{
-  font-family:'Archivo Expanded';font-size:38px;font-weight:800;color:var(--bleu-france);
+  font-family:system-ui,sans-serif;font-size:38px;font-weight:800;color:var(--bleu-france);
   font-variant-numeric:tabular-nums;
   min-height:1.15em;
   line-height:1.15;
@@ -333,19 +303,14 @@ section{padding:56px 0;}
   border-bottom:1px solid var(--gris-bordure);
 }
 .piste-logos{
-  display:flex;gap:60px;
-  width:max-content;
-  animation:defilement 22s linear infinite;
+  display:flex;gap:48px;flex-wrap:wrap;
+  justify-content:center;width:100%;
 }
 .piste-logos img{
   width:115px;height:46px;
   object-fit:contain;
   flex-shrink:0;
   filter:grayscale(100%);opacity:.7;
-}
-@keyframes defilement{
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
 }
 
 /* Footer */
@@ -386,8 +351,6 @@ footer.site-footer{
     animation-iteration-count:1!important;
     transition-duration:0.01ms!important;
   }
-  .piste-logos{animation:none;flex-wrap:wrap;width:auto;justify-content:center;}
-  .mascotte-flottante{animation:none;}
   .carte-service:hover{transform:none;}
 }
 
@@ -532,24 +495,7 @@ footer.site-footer{
 .exemple-carte.valide .legende{color:#1e7d34;font-weight:600;}
 .exemple-carte.invalide .legende{color:var(--rouge-marianne);font-weight:600;}
 
-/* Carrousel d'exemples plein format (autoplay) */
-.carrousel-exemples{
-  position:relative;margin:20px 0 30px;border-radius:8px;overflow:hidden;
-  border:1px solid var(--gris-bordure);
-  background:#fff;
-}
-.carrousel-piste{
-  display:flex;transition:transform .6s ease;
-  aspect-ratio:14 / 9;
-  background:var(--gris-fond);
-}
-.carrousel-piste img{
-  width:100%;flex:0 0 100%;display:block;
-  height:100%;object-fit:cover;aspect-ratio:14 / 9;
-}
-.carrousel-points{display:flex;justify-content:center;gap:8px;padding:12px;background:#fff;}
-.carrousel-points span{width:8px;height:8px;border-radius:50%;background:#ccc;}
-.carrousel-points span.actif{background:var(--bleu-france);}
+
 
 .groupe-champ label input[type=checkbox]{
   width:auto;margin-right:8px;
@@ -581,7 +527,7 @@ footer.site-footer{
 }
 .numero-dossier{
   display:inline-block;background:var(--gris-fond);padding:10px 22px;border-radius:6px;
-  font-family:'Archivo Expanded';font-weight:700;letter-spacing:.05em;margin:14px 0;
+  font-family:system-ui,sans-serif;font-weight:700;letter-spacing:.05em;margin:14px 0;
 }
 
 .bandeau-erreur{
@@ -589,17 +535,7 @@ footer.site-footer{
   padding:14px 18px;border-radius:6px;margin-bottom:22px;font-size:14.5px;
 }
 
-/* Note flottante mascotte décorative (lourde, inutile) */
-.mascotte-flottante{
-  position:fixed;bottom:24px;right:24px;
-  width:90px;height:90px;
-  z-index:50;
-  animation:flotte 3.4s ease-in-out infinite;
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,.25));
-  contain:layout paint;
-}
-@keyframes flotte{
-  0%,100%{transform:translateY(0);}
+
   50%{transform:translateY(-14px);}
 }
 
@@ -610,5 +546,6 @@ footer.site-footer{
   .footer-grid{grid-template-columns:repeat(2,1fr);}
   .ligne-deux{grid-template-columns:1fr;}
   .galerie-exemples{grid-template-columns:1fr;}
-  .mascotte-flottante{width:60px;height:60px;}
+  
 }
+
