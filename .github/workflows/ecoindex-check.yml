@@ -1,0 +1,51 @@
+name: ecoindex-check
+run-name: ${{ github.actor }} is running ecoindex check
+on: [workflow_dispatch]
+
+jobs:
+  launch-ecoindex-analysis:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Launch analysis
+        id: launchAnalysis
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://api.ecoindex.fr/v1/tasks/ecoindexes/'
+          method: 'POST'
+          data: '{"web_page": {"width": 1920, "height": 1080, "url": "https://charlenehourdin.github.io/servicepublic/"}, "custom_headers": {"Accept": "application/json"}}'
+
+      - name: Sleep for analysis
+        run: sleep 120s
+        shell: bash
+
+      - name: Get analysis result
+        id: getAnalysis
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://api.ecoindex.fr/v1/tasks/ecoindexes/${{ fromJson(steps.launchAnalysis.outputs.response) }}'
+          method: 'GET'
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Store analysis
+        uses: 1arp/create-a-file-action@0.4.6
+        with:
+          path: 'ecoindex'
+          isAbsolutePath: 'false'
+          file: ecoindex-analysis-${{ steps.date.outputs.date }}.json
+          content: ${{ steps.getAnalysis.outputs.response }}
+
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: ajout analyse EcoIndex ${{ steps.date.outputs.date }}"
