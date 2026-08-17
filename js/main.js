@@ -10,14 +10,14 @@ function formatTaille(octets){
   return `${(octets / (1024 * 1024)).toFixed(2)} Mo`;
 }
 
-// Cache des ressources statiques
+// Désactive d'anciens SW (évite préchargement images/fonts inutiles)
 if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    const script = document.querySelector('script[src*="main.js"]');
-    if(!script) return;
-    const swUrl = new URL('../sw.js', script.src);
-    navigator.serviceWorker.register(swUrl.href).catch(()=>{});
-  });
+  navigator.serviceWorker.getRegistrations().then((regs)=>{
+    regs.forEach((r)=> r.unregister());
+  }).catch(()=>{});
+  if(window.caches){
+    caches.keys().then((keys)=> Promise.all(keys.map((k)=> caches.delete(k)))).catch(()=>{});
+  }
 }
 
 function initZoneUpload(){
