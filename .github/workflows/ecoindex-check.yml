@@ -14,38 +14,53 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Launch analysis
-        id: launchAnalysis
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://api.ecoindex.fr/v1/tasks/ecoindexes/'
-          method: 'POST'
-          data: '{"web_page": {"width": 1920, "height": 1080, "url": "https://charlenehourdin.github.io/servicepublic/"}, "custom_headers": {"Accept": "application/json"}}'
+      - name: Analyze all pages with EcoIndex
+        id: analyse
+        run: |
+          set -euo pipefail
+          DATE=$(date +'%Y-%m-%d')
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          mkdir -p ecoindex
+          rm -f ecoindex/.gitkeep
 
-      - name: Sleep for analysis
-        run: sleep 120s
-        shell: bash
+          # slug|url
+          PAGES=(
+            "accueil|https://charlenehourdin.github.io/servicepublic/"
+            "carte-identite|https://charlenehourdin.github.io/servicepublic/pages/carte-identite/etape-1.html"
+          )
 
-      - name: Get analysis result
-        id: getAnalysis
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: 'https://api.ecoindex.fr/v1/tasks/ecoindexes/${{ fromJson(steps.launchAnalysis.outputs.response) }}'
-          method: 'GET'
+          for ENTRY in "${PAGES[@]}"; do
+            SLUG="${ENTRY%%|*}"
+            PAGE_URL="${ENTRY#*|}"
+            echo "::group::EcoIndex — $SLUG ($PAGE_URL)"
 
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+            RESP=$(curl -sS -X POST 'https://api.ecoindex.fr/v1/tasks/ecoindexes/' \
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json' \
+              -d "{\"web_page\": {\"width\": 1920, \"height\": 1080, \"url\": \"${PAGE_URL}\"}}")
+            echo "Launch response: $RESP"
 
-      - name: Store analysis
-        uses: 1arp/create-a-file-action@0.4.6
-        with:
-          path: 'ecoindex'
-          isAbsolutePath: 'false'
-          file: ecoindex-analysis-${{ steps.date.outputs.date }}.json
-          content: ${{ steps.getAnalysis.outputs.response }}
+            # L'API renvoie souvent l'UUID en JSON string brut ("uuid")
+            TASK_ID=$(echo "$RESP" | python3 -c "import sys,json; data=json.load(sys.stdin); print(data if isinstance(data,str) else data.get('id', data))")
+            echo "Task ID: $TASK_ID"
+
+            for i in $(seq 1 24); do
+              RESULT=$(curl -sS "https://api.ecoindex.fr/v1/tasks/ecoindexes/${TASK_ID}")
+              STATUS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status',''))")
+              echo "Attempt $i — status: $STATUS"
+              if [ "$STATUS" = "SUCCESS" ] || [ "$STATUS" = "FAILURE" ] || [ "$STATUS" = "ERROR" ]; then
+                break
+              fi
+              sleep 10
+            done
+
+            OUT="ecoindex/ecoindex-analysis-${DATE}-${SLUG}.json"
+            echo "$RESULT" | python3 -m json.tool > "$OUT"
+            echo "Saved $OUT"
+            echo "::endgroup::"
+          done
 
       - name: Auto commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: ajout analyse EcoIndex ${{ steps.date.outputs.date }}"
+          commit_message: "chore: ajout analyses EcoIndex ${{ steps.analyse.outputs.date }}"

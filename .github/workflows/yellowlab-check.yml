@@ -16,74 +16,82 @@ jobs:
 
       # Doc: https://github.com/YellowLabTools/YellowLabTools/wiki/Public-API
       # Limite publique : max 12 analyses / 24 h par IP
-      - name: Launch Yellow Lab Tools run
-        id: run
+      - name: Analyze all pages with Yellow Lab Tools
+        id: analyse
         run: |
           set -euo pipefail
-          RESP=$(curl -s -w "\n%{http_code}" -X POST 'https://yellowlab.tools/api/runs' \
-            -H 'Content-Type: application/json' \
-            -d '{"url":"https://charlenehourdin.github.io/servicepublic/","device":"desktop","waitForResponse":false}')
-          HTTP=$(echo "$RESP" | tail -n1)
-          BODY=$(echo "$RESP" | sed '$d')
-          echo "HTTP status: $HTTP"
-          echo "Body: $BODY"
-
-          if [ "$HTTP" = "429" ] || echo "$BODY" | grep -qi 'Too Many Requests\|"code":429'; then
-            echo "::error::Yellow Lab Tools a renvoyé 429 Too Many Requests."
-            echo "::error::Limite API : max 12 analyses / 24 h. Réessaie plus tard, ou lance l'analyse en local."
-            exit 1
-          fi
-
-          if [ "$HTTP" != "200" ] && [ "$HTTP" != "201" ] && [ "$HTTP" != "202" ]; then
-            echo "::error::Échec du lancement Yellow Lab Tools (HTTP $HTTP)"
-            exit 1
-          fi
-
-          RUN_ID=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin)['runId'])")
-          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
-          echo "Yellow Lab Tools runId: $RUN_ID"
-
-      - name: Wait for analysis
-        run: |
-          set -euo pipefail
-          RUN_ID="${{ steps.run.outputs.run_id }}"
-          for i in $(seq 1 40); do
-            RAW=$(curl -s -w "\n%{http_code}" "https://yellowlab.tools/api/runs/${RUN_ID}")
-            HTTP=$(echo "$RAW" | tail -n1)
-            BODY=$(echo "$RAW" | sed '$d')
-            if [ "$HTTP" = "429" ]; then
-              echo "::error::429 pendant le polling. Quota Yellow Lab Tools dépassé."
-              exit 1
-            fi
-            STATUS=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin)['status']['statusCode'])")
-            echo "Attempt $i — status: $STATUS"
-            if [ "$STATUS" = "complete" ]; then
-              exit 0
-            fi
-            if [ "$STATUS" = "failed" ]; then
-              echo "Yellow Lab Tools run failed"
-              echo "$BODY"
-              exit 1
-            fi
-            sleep 15
-          done
-          echo "Timeout waiting for Yellow Lab Tools"
-          exit 1
-
-      - name: Get results
-        id: date
-        run: |
-          set -euo pipefail
-          RUN_ID="${{ steps.run.outputs.run_id }}"
           DATE=$(date +'%Y-%m-%d')
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
           mkdir -p yellowlab
-          curl -sS "https://yellowlab.tools/api/results/${RUN_ID}" -o "yellowlab/yellowlab-analysis-${DATE}.json"
-          curl -sS "https://yellowlab.tools/api/results/${RUN_ID}/generalScores" -o "yellowlab/yellowlab-scores-${DATE}.json"
           rm -f yellowlab/.gitkeep
-          python3 -c "import json; d=json.load(open('yellowlab/yellowlab-scores-${DATE}.json')); print('globalScore', d.get('globalScore'))"
+
+          PAGES=(
+            "accueil|https://charlenehourdin.github.io/servicepublic/"
+            "carte-identite|https://charlenehourdin.github.io/servicepublic/pages/carte-identite/etape-1.html"
+          )
+
+          for ENTRY in "${PAGES[@]}"; do
+            SLUG="${ENTRY%%|*}"
+            PAGE_URL="${ENTRY#*|}"
+            echo "::group::Yellow Lab — $SLUG ($PAGE_URL)"
+
+            RESP=$(curl -s -w "\n%{http_code}" -X POST 'https://yellowlab.tools/api/runs' \
+              -H 'Content-Type: application/json' \
+              -d "{\"url\":\"${PAGE_URL}\",\"device\":\"desktop\",\"waitForResponse\":false}")
+            HTTP=$(echo "$RESP" | tail -n1)
+            BODY=$(echo "$RESP" | sed '$d')
+            echo "HTTP status: $HTTP"
+            echo "Body: $BODY"
+
+            if [ "$HTTP" = "429" ] || echo "$BODY" | grep -qi 'Too Many Requests\|"code":429'; then
+              echo "::error::Yellow Lab Tools a renvoyé 429 Too Many Requests."
+              echo "::error::Limite API : max 12 analyses / 24 h. Réessaie plus tard, ou lance l'analyse en local."
+              exit 1
+            fi
+
+            if [ "$HTTP" != "200" ] && [ "$HTTP" != "201" ] && [ "$HTTP" != "202" ]; then
+              echo "::error::Échec du lancement Yellow Lab Tools (HTTP $HTTP) pour $SLUG"
+              exit 1
+            fi
+
+            RUN_ID=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin)['runId'])")
+            echo "runId: $RUN_ID"
+
+            for i in $(seq 1 40); do
+              RAW=$(curl -s -w "\n%{http_code}" "https://yellowlab.tools/api/runs/${RUN_ID}")
+              POLL_HTTP=$(echo "$RAW" | tail -n1)
+              POLL_BODY=$(echo "$RAW" | sed '$d')
+              if [ "$POLL_HTTP" = "429" ]; then
+                echo "::error::429 pendant le polling. Quota Yellow Lab Tools dépassé."
+                exit 1
+              fi
+              STATUS=$(echo "$POLL_BODY" | python3 -c "import sys,json; print(json.load(sys.stdin)['status']['statusCode'])")
+              echo "Attempt $i — status: $STATUS"
+              if [ "$STATUS" = "complete" ]; then
+                break
+              fi
+              if [ "$STATUS" = "failed" ]; then
+                echo "Yellow Lab Tools run failed for $SLUG"
+                echo "$POLL_BODY"
+                exit 1
+              fi
+              if [ "$i" -eq 40 ]; then
+                echo "Timeout waiting for Yellow Lab Tools ($SLUG)"
+                exit 1
+              fi
+              sleep 15
+            done
+
+            curl -sS "https://yellowlab.tools/api/results/${RUN_ID}" -o "yellowlab/yellowlab-analysis-${DATE}-${SLUG}.json"
+            curl -sS "https://yellowlab.tools/api/results/${RUN_ID}/generalScores" -o "yellowlab/yellowlab-scores-${DATE}-${SLUG}.json"
+            python3 -c "import json; d=json.load(open('yellowlab/yellowlab-scores-${DATE}-${SLUG}.json')); print('globalScore', d.get('globalScore'))"
+            echo "::endgroup::"
+
+            # Petite pause entre les pages pour limiter le risque de 429
+            sleep 5
+          done
 
       - name: Auto commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: ajout analyse Yellow Lab Tools ${{ steps.date.outputs.date }}"
+          commit_message: "chore: ajout analyses Yellow Lab Tools ${{ steps.analyse.outputs.date }}"
